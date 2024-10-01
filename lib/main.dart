@@ -20,7 +20,7 @@ const double windowHeight = 640;
 void setupWindow() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     WidgetsFlutterBinding.ensureInitialized();
-    setWindowTitle('Provider Counter');
+    setWindowTitle('Provider Counter Demo');
     setWindowMinSize(const Size(windowWidth, windowHeight));
     setWindowMaxSize(const Size(windowWidth, windowHeight));
     getCurrentScreen().then((screen) {
@@ -100,7 +100,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
+        title: const Text('Flutter Counter Demo'),
       ),
       body: Consumer<Counter>(
         builder: (context, counter, child) {
@@ -110,7 +110,7 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('You have pushed the button this many times:'),
+                  const Text('You have incremented the button this many times:'),
                   Text(
                     '${counter.value}',
                     style: Theme.of(context).textTheme.headlineMedium,
