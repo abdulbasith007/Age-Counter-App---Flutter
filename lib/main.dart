@@ -40,6 +40,13 @@ class Counter with ChangeNotifier {
     value += 1;
     notifyListeners();
   }
+
+  void decrement() {
+    if (value > 0) {
+      value -= 1;
+      notifyListeners();
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -81,13 +88,27 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          var counter = context.read<Counter>();
-          counter.increment();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              var counter = context.read<Counter>();
+              counter.increment();
+            },
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(width: 10),
+          FloatingActionButton(
+            onPressed: () {
+              var counter = context.read<Counter>();
+              counter.decrement();
+            },
+            tooltip: 'Decrement',
+            child: const Icon(Icons.remove),
+          ),
+        ],
       ),
     );
   }
