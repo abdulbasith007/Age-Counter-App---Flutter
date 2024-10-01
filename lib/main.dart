@@ -68,25 +68,63 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
+  String getMilestoneMessage(int value) {
+    if (value <= 12) {
+      return "You're a child!";
+    } else if (value <= 19) {
+      return "Teenager time!";
+    } else if (value <= 30) {
+      return "You're a young adult!";
+    } else if (value <= 50) {
+      return "You're an adult now!";
+    } else {
+      return "Golden years!";
+    }
+  }
+
+  Color getMilestoneColor(int value) {
+    if (value <= 12) {
+      return Colors.lightBlue;
+    } else if (value <= 19) {
+      return Colors.lightGreen;
+    } else if (value <= 30) {
+      return Colors.yellow;
+    } else if (value <= 50) {
+      return Colors.orange;
+    } else {
+      return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Demo Home Page'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Consumer<Counter>(
-              builder: (context, counter, child) => Text(
-                '${counter.value}',
-                style: Theme.of(context).textTheme.headlineMedium,
+      body: Consumer<Counter>(
+        builder: (context, counter, child) {
+          return Container(
+            color: getMilestoneColor(counter.value),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('You have pushed the button this many times:'),
+                  Text(
+                    '${counter.value}',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    getMilestoneMessage(counter.value),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
